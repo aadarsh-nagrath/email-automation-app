@@ -47,14 +47,25 @@ def display_how_to_use_page():
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("""
-    5. **Optional: Add Attachments**:
+    5. **Preview Email Before Sending**:
+        - To ensure your email looks correct before sending, use the **Preview** option under the "Manage Variables" section.
+        - Click on the **Preview** dropdown to view how your email will look after replacing variables with actual values.
+    """)
+
+    # Display the fifth image for "Preview Email"
+    st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
+    st.image("images/a5.png", caption="Click on Preview to view how the email will look before sending it")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown("""
+    6. **Optional: Add Attachments**:
         - If needed, you can attach files (e.g., images, PDFs) using the "Attach a File" option.
 
-    6. **Send Emails**:
+    7. **Send Emails**:
         - Once you've filled out the required fields, click the **Send Email** button.
         - You can add as many lines of recipients as needed, one per line, and the app will send personalized emails to each recipient with the corresponding variables replaced in the email body.
 
-    7. **Feedback Page**:
+    8. **Feedback Page**:
         - To provide feedback on the app, go to the **Feedback Page** by clicking the option in the sidebar. You can leave your comments or suggestions for improvements.
     """)
 

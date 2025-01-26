@@ -2,6 +2,7 @@ import re
 import streamlit as st
 from feedback import display_feedback_page
 from functions import send_email, convert_to_html
+from how_to import display_how_to_use_page
 
 # Streamlit App Title
 st.set_page_config(page_title="Email Automation Tool", page_icon="📧", layout="wide")
@@ -13,11 +14,9 @@ with st.sidebar:
     sender_email = st.text_input("Sender's Email Address", placeholder="Enter your email address", key="sender_email_unique")
     sender_password = st.text_input("Sender's Email Password", type="password", placeholder="Enter your email password", key="sender_password_unique")
 
-    theme = st.selectbox("Select Theme", ["Light", "Dark"], key="theme_unique")
-    
     # Feedback Section Link
     st.markdown("### Feedback")
-    feedback_page = st.radio("Go to Feedback Section", ["Email Automation", "Feedback Section"])
+    feedback_page = st.radio("Go to Feedback Section", ["Email Automation","How to Use This App","Feedback Section"])
 
 if feedback_page == "Email Automation":
     # Create columns with increased space between them
@@ -25,7 +24,7 @@ if feedback_page == "Email Automation":
 
     # Central Section - Email Composition
     with col1:
-        st.markdown("<h2>Email Composition</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='color:black;'>Email Composition</h2>", unsafe_allow_html=True)
 
         # Email Subject and Body
         subject = st.text_input("Email Subject", placeholder="Enter the subject of the email", key="subject_input")
@@ -38,7 +37,7 @@ if feedback_page == "Email Automation":
     with col3:
         # Expander with markdown content inside
         with st.expander("Manage Variables", expanded=True):
-            st.markdown("<h2>Manage Variables</h2>", unsafe_allow_html=True)
+            st.markdown("<h2 style='color:black;'>Manage Variables</h2>", unsafe_allow_html=True)
 
             # Input for recipient data
             recipient_data = st.text_area(
@@ -50,8 +49,11 @@ if feedback_page == "Email Automation":
             # Save recipient data for later use
             st.session_state["recipient_data"] = recipient_data
 
+        # Send Email button below Manage Variables
+        send_button = st.button("Send Email", key="send_button_sidebar")
+
     # Send Email Button Logic
-    if st.button("Send Email", key="send_button_sidebar"):
+    if send_button:
         recipient_data = st.session_state.get("recipient_data", "")  # Get recipient data from right panel
         if not sender_email or not sender_password or not recipient_data:
             st.error("Please fill in all required fields!")
@@ -97,7 +99,7 @@ if feedback_page == "Email Automation":
                     try:
                         if send_email(subject, html_body, recipient_email, sender_email, sender_password):
                             success_count += 1
-                            st.success(f"Email sent to {recipient_email}")
+                            st.toast(f"Email sent to {recipient_email}", icon="✅")
                     except Exception as e:
                         st.error(f"Error sending to {recipient_email}: {e}")
                         failure_count += 1
@@ -106,6 +108,9 @@ if feedback_page == "Email Automation":
             st.success(f"Emails sent successfully to {success_count} recipients.")
             if failure_count > 0:
                 st.error(f"Failed to send emails to {failure_count} recipients.")
+
+elif feedback_page == "How to Use This App":
+    display_how_to_use_page()
 
 elif feedback_page == "Feedback Section":
     # Only show feedback section when selected

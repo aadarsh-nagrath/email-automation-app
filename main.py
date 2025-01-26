@@ -4,6 +4,8 @@ from feedback import display_feedback_page
 from functions import send_email, convert_to_html
 from how_to import display_how_to_use_page
 
+# Streamlit App Title
+st.set_page_config(page_title="Email Automation Tool", page_icon="📧", layout="wide")
 
 google_analytics_script = """
     <!-- Google tag (gtag.js) -->
@@ -21,8 +23,6 @@ google_analytics_script = """
 st.markdown(google_analytics_script, unsafe_allow_html=True)
 
 
-# Streamlit App Title
-st.set_page_config(page_title="Email Automation Tool", page_icon="📧", layout="wide")
 st.title("📧 Email Automation Tool")
 
 # Define send_button globally

@@ -4,6 +4,23 @@ from feedback import display_feedback_page
 from functions import send_email, convert_to_html
 from how_to import display_how_to_use_page
 
+
+google_analytics_script = """
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1SZ7Z8NK69"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1SZ7Z8NK69');
+    </script>
+"""
+
+# Inject the script into the app
+st.markdown(google_analytics_script, unsafe_allow_html=True)
+
+
 # Streamlit App Title
 st.set_page_config(page_title="Email Automation Tool", page_icon="📧", layout="wide")
 st.title("📧 Email Automation Tool")

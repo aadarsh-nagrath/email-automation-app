@@ -4,9 +4,10 @@ from feedback import display_feedback_page
 from functions import send_email, convert_to_html
 from how_to import display_how_to_use_page
 
-# Streamlit App Title
+# Set the page config first
 st.set_page_config(page_title="Email Automation Tool", page_icon="📧", layout="wide")
 
+# Google Analytics script
 google_analytics_script = """
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1SZ7Z8NK69"></script>
@@ -14,15 +15,14 @@ google_analytics_script = """
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-1SZ7Z8NK69');
     </script>
 """
 
-# Inject the script into the app
+# Inject the Google Analytics script
 st.markdown(google_analytics_script, unsafe_allow_html=True)
 
-
+# Your app code continues here...
 st.title("📧 Email Automation Tool")
 
 # Define send_button globally
